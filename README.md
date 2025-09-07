@@ -1,9 +1,9 @@
 # Hi, I'm Nishtha Ladi 👋
 
-🎓 Presidential Scholar and Dean’s List awardee @ Boston University
-💡 Computer Engineering with a Machine Learning concentration
-🌱 Co-founder of Endelevu (sustainable fashion initiative)  
-💃 An avid dance and sports enthusiast.
+- 🎓 Presidential Scholar and Dean’s List awardee @ Boston University
+- 💡 Computer Engineering with a Machine Learning concentration
+- 🌱 Co-founder of Endelevu (sustainable fashion initiative)  
+- 💃 An avid dance and sports enthusiast.
 
 ---
 
@@ -26,5 +26,5 @@
 ---
 
 ## 📫 Connect with me
-🌐 [LinkedIn](https://www.linkedin.com/in/nishtha-ladi-005232318) 
-✉️ Email: ladi21@bu.edu    
+- 🌐 LinkedIn: https://www.linkedin.com/in/nishtha-ladi-005232318
+- ✉️ Email: ladi21@bu.edu    
