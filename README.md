@@ -1,42 +1,30 @@
-# Hi, I'm Nishtha 👋
+# Hi, I'm Nishtha Ladi 👋
 
-🎓 Computer Engineering student @ Boston University | 💡 Focus: Machine Learning  
+🎓 Presidential Scholar and Dean’s List awardee @ Boston University
+💡 Computer Engineering with a Machine Learning concentration
 🌱 Co-founder of Endelevu (sustainable fashion initiative)  
-💃 Creative Director | Dance Choreographer  
+💃 An avid dance and sports enthusiast.
 
 ---
 
 ## 🔹 Skills
-- Programming: Python, JavaScript, Java, C++
-- ML & Data: PyTorch, TensorFlow, Scikit-learn
-- OCR & CV: PaddleOCR, Donut, OpenCV
-- Web Dev: React, Node.js, Spring Boot
-
+- **Programming and Tools:** Python, C++, Java, SQL, MATLAB, AI/ML
+- **Languages:** English, Hindi, Odia and Telugu
 ---
 
 ## 🔹 Projects
-- [Stock Price Forecasting with LSTMs & Transformers](https://github.com/yourusername/stock-forecasting)
-- [OCR Document Validator (GST, IEC, Udyam)](https://github.com/yourusername/ocr-validation)
-- [Cricket Fantasy Auction Game](https://github.com/yourusername/cricket-fantasy-auction)
+- [Othello](https://github.com/yourusername/stock-forecasting)
+- [Temperature Sensor Box](https://github.com/yourusername/ocr-validation)
+- ["Bug Fixing" Tetris Game](https://github.com/yourusername/cricket-fantasy-auction)
+- [air quality surveillance data Analysis]
+- [Biometric Device: Smart Runner 4000]
+- [Fugaku Dataset Feature Prediction]
+- [Contract Analysis]
+- [Cricket Fantasy Auction Game]
+- [Digital Clock]
 
 ---
 
 ## 📫 Connect with me
-- [LinkedIn](www.linkedin.com/in/nishtha-ladi-005232318)
-- [Email](nishtha.ladi@gmail.com)
-
-
-<!--
-**NishthaLadi/nishthaladi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+🌐 [LinkedIn](https://www.linkedin.com/in/nishtha-ladi-005232318) 
+✉️ Email: ladi21@bu.edu    
