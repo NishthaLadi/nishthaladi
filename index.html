@@ -1,121 +1,250 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nishtha Ladi | Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f8f9fa;
-      color: #333;
+import React, { useState } from "react";
+
+// Single-file, responsive portfolio with top tabs like the screenshot.
+// Tabs: About me, Projects, Papers, Dance
+// Tailwind used for styling (no imports needed in this environment).
+
+const TabButton = ({ label, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className={
+      "px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base transition " +
+      (active
+        ? "bg-black text-white shadow"
+        : "bg-white text-gray-700 hover:bg-gray-100 border")
     }
-    header {
-      background: #222;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1, h2 {
-      color: #222;
-    }
-    .projects div {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Hi, I'm Nishtha Ladi 👋</h1>
-    <p>🎓 Presidential Scholar & Dean’s List @ Boston University | 💡 Computer Engineering (ML Concentration)</p>
-    <p>🌱 Co-founder of Endelevu | 💃 Dance & Sports Enthusiast</p>
-  </header>
+    aria-pressed={active}
+  >
+    {label}
+  </button>
+);
 
-  <section>
-    <h2>🛠️ Skills</h2>
-    <p><b>Programming and Tools:</b> Python, C++, Java, SQL, MATLAB, AI/ML</p>
-    <p><b>Languages:</b> English, Hindi, Odia, Telugu</p>
-  </section>
+const SectionCard = ({ children, className = "" }) => (
+  <div className={`bg-white rounded-2xl shadow-sm border p-6 sm:p-8 ${className}`}>
+    {children}
+  </div>
+);
 
-  <section>
-    <h2>📚 Related Coursework</h2>
-    <p>Linear Algebra, Intro to Software Engineering, Data Structures and Algorithms, Software Design, Operating Systems, Cloud Computing, Machine Learning, AI</p>
-  </section>
+const ProjectItem = ({ title, href, desc }) => (
+  <li className="mb-6">
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="text-lg font-semibold underline-offset-4 hover:underline"
+    >
+      {title}
+    </a>
+    {desc && <p className="text-gray-600 mt-1 text-sm sm:text-base">{desc}</p>}
+  </li>
+);
 
-  <section class="projects">
-    <h2>🚀 Projects</h2>
+export default function Portfolio() {
+  const [tab, setTab] = useState("About me");
 
-    <div>
-      <h3>📑 <a href="#">Contract Analysis</a></h3>
-      <p>Built an NLP pipeline to extract, categorize, and analyze clauses from contracts. The system highlights key risks, obligations, and compliance markers for faster contract review. Report and codebase available upon request.</p>
+  const tabs = ["About me", "Projects", "Papers", "Dance"];
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      {/* Header / Brand */}
+      <header className="bg-black text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight">Nishtha Ladi</h1>
+          <p className="mt-2 text-sm sm:text-base opacity-90">
+            Presidential Scholar & Dean’s List @ Boston University • Computer Engineering (ML Concentration)
+          </p>
+          <p className="text-sm sm:text-base opacity-80">Co‑founder of Endelevu • Dance & Sports Enthusiast</p>
+        </div>
+      </header>
+
+      {/* Tabs */}
+      <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center gap-2 sm:gap-3 py-3 sm:py-4 overflow-x-auto no-scrollbar">
+            {tabs.map((t) => (
+              <TabButton key={t} label={t} active={tab === t} onClick={() => setTab(t)} />
+            ))}
+            <div className="ml-auto flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/nishtha-ladi-005232318"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm sm:text-base hover:underline"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="1 Page Resume_Nishtha Ladi_Sep25.docx.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm sm:text-base hover:underline"
+              >
+                Resume (PDF)
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Content */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        {tab === "About me" && (
+          <div className="space-y-8">
+            <SectionCard>
+              <h2 className="text-xl sm:text-2xl font-semibold">About me</h2>
+              <p className="mt-3 text-gray-700 leading-relaxed">
+                I’m a Computer Engineering undergrad (ML concentration) at Boston University, focused on
+                building reliable, practical AI systems and energy‑aware computing. I enjoy creating products
+                that blend clever engineering with clean UX—and I dance with BU Jalwa on the side ✨.
+              </p>
+            </SectionCard>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <SectionCard>
+                <h3 className="text-lg font-semibold">Skills</h3>
+                <ul className="mt-3 list-disc list-inside text-gray-700 space-y-1">
+                  <li>
+                    <b>Programming & Tools:</b> Python, C++, Java, SQL, MATLAB, AI/ML
+                  </li>
+                  <li>
+                    <b>Other:</b> AWS, REST APIs, data visualization, hardware design (Verilog)
+                  </li>
+                  <li>
+                    <b>Languages:</b> English, Hindi, Odia, Telugu
+                  </li>
+                </ul>
+              </SectionCard>
+              <SectionCard>
+                <h3 className="text-lg font-semibold">Related Coursework</h3>
+                <p className="mt-3 text-gray-700">
+                  Linear Algebra, Intro to Software Engineering, Data Structures & Algorithms, Software Design,
+                  Operating Systems, Cloud Computing, Machine Learning, Artificial Intelligence
+                </p>
+              </SectionCard>
+            </div>
+          </div>
+        )}
+
+        {tab === "Projects" && (
+          <div className="space-y-8">
+            <SectionCard>
+              <h2 className="text-xl sm:text-2xl font-semibold">Selected Projects</h2>
+              <ul className="mt-5">
+                <ProjectItem
+                  title="Contract Analysis"
+                  href="#"
+                  desc="NLP pipeline to extract, categorize, and analyze clauses from contracts—surfacing risks, obligations, and compliance markers for faster review. Report/code on request."
+                />
+                <ProjectItem
+                  title="Cricket Fantasy Auction Game"
+                  href="#"
+                  desc="Auction-based fantasy cricket with live match integration; real‑time points update from performance feeds."
+                />
+                <ProjectItem
+                  title="Fugaku Dataset Feature Prediction"
+                  href="https://github.com/NishthaLadi-21/Fugaku.git"
+                  desc="ML models to predict performance features of supercomputer jobs; explored feature selection & regression for scalable HPC workloads."
+                />
+                <ProjectItem
+                  title="Othello Game"
+                  href="https://github.com/NishthaLadi/Comp_proj_Othello"
+                  desc="One‑ and two‑player Othello with board logic, move validation, and basic AI strategies."
+                />
+                <ProjectItem
+                  title="\"Bug Fixing\" Tetris Game (PDF)"
+                  href="EC 327 Project_Group 4.pdf"
+                  desc="Custom Tetris with debugging challenges embedded in gameplay."
+                />
+                <ProjectItem
+                  title="Digital Clock (Verilog) — PDF"
+                  href="EC 311 - Final Project.pdf"
+                  desc="Modular hardware design and real‑time simulation."
+                />
+                <ProjectItem
+                  title="Air Quality Surveillance Data Analysis"
+                  href="Air Quality Surveillance Data Analysis.pdf"
+                  desc="Data cleaning, visualization, and analysis of urban air quality trends."
+                />
+                <ProjectItem
+                  title="Biometric Device: Smart Runner 4000 — Final Presentation"
+                  href="EK210-Final_Presentation.pdf"
+                  desc="Sensor‑based performance tracker for runners (heart rate, distance, stride). Includes analytics to assist training."
+                />
+                <ProjectItem
+                  title="Biometric Device: Smart Runner 4000 — Project Report"
+                  href="EK210_FinalReport.pdf"
+                />
+                <ProjectItem
+                  title="Temperature Sensor Box (IoT) — Demo PDF"
+                  href="Ek131+-+FinalDemo+-+Nishtha+Ladi.pdf"
+                />
+              </ul>
+            </SectionCard>
+          </div>
+        )}
+
+        {tab === "Papers" && (
+          <div className="space-y-8">
+            <SectionCard>
+              <h2 className="text-xl sm:text-2xl font-semibold">Papers & Technical Writing</h2>
+              <ul className="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                <li>
+                  <span className="font-medium">DeepSeek Efficiency Analysis (2025):</span> enterprise cost/energy/deployment study; comparisons with GPT‑4o & Claude 3.5; prepared detailed training deck for EY.
+                </li>
+                <li>
+                  <span className="font-medium">Physics‑Informed ELMs & NeuroChaos (2024):</span> notes and experiments on PI‑ELM for differential equations and NeuroChaos for classification/regression.
+                </li>
+              </ul>
+              <p className="mt-4 text-gray-600 text-sm">(Add public links or PDFs here when ready.)</p>
+            </SectionCard>
+          </div>
+        )}
+
+        {tab === "Dance" && (
+          <div className="space-y-8">
+            <SectionCard>
+              <h2 className="text-xl sm:text-2xl font-semibold">Dance — BU Jalwa</h2>
+              <p className="mt-3 text-gray-700">
+                Captain for BU Jalwa (XXII season). I help with choreography, recruitment, and team communications.
+                We perform high‑energy Bollywood‑fusion sets with strong storytelling and stagecraft.
+              </p>
+              <div className="mt-5 grid sm:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold">Highlights</h3>
+                  <ul className="mt-2 list-disc list-inside text-gray-700 space-y-1">
+                    <li>Choreography & formations for competition sets</li>
+                    <li>Photoshoot & costume planning (pastel/white theme for XXII)</li>
+                    <li>Show coordination (e.g., BUIC Fall Show)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold">Upcoming / Example Dates</h3>
+                  <ul className="mt-2 list-disc list-inside text-gray-700 space-y-1">
+                    <li>Sept 26 — Big/Lil Reveal + Initiation</li>
+                    <li>Sept 28 — Team Photoshoot</li>
+                    <li>Nov 2 — BUIC Fall Show</li>
+                  </ul>
+                </div>
+              </div>
+            </SectionCard>
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-gray-600 flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+          <span>© {new Date().getFullYear()} Nishtha Ladi</span>
+          <span className="hidden sm:inline">•</span>
+          <a
+            href="mailto:nishthaladi21@gmail.com"
+            className="hover:underline"
+          >
+            nishthaladi21@gmail.com
+          </a>
+        </div>
+      </footer>
     </div>
+  );
+}
 
-    <div>
-      <h3>🏏 <a href="#">Cricket Fantasy Auction Game</a></h3>
-      <p>Developed a fantasy cricket platform with live match integration. Players bid for cricketers in an auction system and earn real-time points based on match performance, combining gaming with strategy.</p>
-    </div>
-
-    <div>
-      <h3>💻 <a href="https://github.com/NishthaLadi-21/Fugaku.git">Fugaku Dataset Feature Prediction</a></h3>
-      <p>Designed machine learning models to predict performance features of jobs run on Japan’s Fugaku supercomputer. Explored feature selection, regression models, and error minimization techniques for scalable HPC workloads.</p>
-    </div>
-
-    <div>
-      <h3>🎮 <a href="https://github.com/NishthaLadi/Comp_proj_Othello">Othello Game</a></h3>
-      <p>Created both one-player and two-player versions of the classic Othello game. Implemented board logic, move validation, and AI strategies to enhance gameplay experience.</p>
-    </div>
-
-    <div>
-      <h3>🧩 <a href="EC 327 Project_Group 4.pdf">"Bug Fixing" Tetris Game</a></h3>
-      <p>Built a custom Tetris variant with debugging challenges embedded in gameplay. Players must fix “bugs” in dropped blocks, adding a new dimension of problem-solving to the classic puzzle game.</p>
-    </div>
-
-    <div>
-      <h3>⏰ <a href="EC 311 - Final Project.pdf">Digital Clock</h3>
-      <p>Designed and implemented a digital clock using Verilog hardware description language. Demonstrated real-time simulation and modular hardware design principles.</p>
-    </div>
-
-    <div>
-      <h3>🌍 <a href="Air Quality Surveillance Data Analysis.pdf">Air Quality Surveillance Data Analysis</a></h3>
-      <p>Analyzed datasets on urban air quality, visualized pollution trends, and built dashboards to study environmental impacts. Explored data cleaning, statistical analysis, and Python-based visualization.</p>
-    </div>
-
-    <div>
-      <h3>🏃 Biometric Device: Smart Runner 4000</h3>
-      <p>Engineered a biometric tracking system to monitor runners’ performance, capturing heart rate, distance, and stride data. Integrated sensor readings with analytics to assist athletes in training optimization.</p>
-      <p>
-        📄 <a href="EK210-Final_Presentation.pdf" target="_blank">Final Presentation (PDF)</a><br>
-        📄 <a href="EK210_FinalReport.pdf" target="_blank">Project Report (PDF)</a>
-      </p>
-    </div>
-
-    <div>
-      <h3>🌡️ <a href="Ek131+-+FinalDemo+-+Nishtha+Ladi.pdf">Temperature Sensor Box</a></h3>
-      <p>Developed an IoT-enabled sensor box to measure and log temperature data. Included real-time monitoring and basic alerting features for smart environments.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>📫 Connect with Me</h2>
-    <p>🌐 <a href="https://www.linkedin.com/in/nishtha-ladi-005232318" target="_blank">LinkedIn</a></p>
-    <p>📄 <a href="1 Page Resume_Nishtha Ladi_Sep25.docx.pdf" target="_blank">View Resume (PDF)</a></p>
-  </section>
-</body>
-</html>
