@@ -1,250 +1,165 @@
-import React, { useState } from "react";
-
-// Single-file, responsive portfolio with top tabs like the screenshot.
-// Tabs: About me, Projects, Papers, Dance
-// Tailwind used for styling (no imports needed in this environment).
-
-const TabButton = ({ label, active, onClick }) => (
-  <button
-    onClick={onClick}
-    className={
-      "px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base transition " +
-      (active
-        ? "bg-black text-white shadow"
-        : "bg-white text-gray-700 hover:bg-gray-100 border")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nishtha Ladi | Portfolio</title>
+  <style>
+    :root {
+      --bg:#f6f7fb; --ink:#1c1d22; --muted:#667085; --brand:#111; --card:#fff; --ring:#e6e8ee;
     }
-    aria-pressed={active}
-  >
-    {label}
-  </button>
-);
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    .container{max-width:1040px;margin:auto;padding:0 20px}
+    header{background:var(--brand);color:#fff}
+    header .container{padding:28px 20px 36px}
+    h1{margin:0;font-size:32px;letter-spacing:-0.02em}
+    .sub{margin:8px 0 0;font-size:14px;opacity:.9}
+    .sub2{margin:4px 0 0;font-size:14px;opacity:.8}
 
-const SectionCard = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-2xl shadow-sm border p-6 sm:p-8 ${className}`}>
-    {children}
-  </div>
-);
+    /* Tabs */
+    .tabs{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--ring)}
+    .tabs .container{display:flex;gap:10px;align-items:center;padding:12px 20px}
+    .tab{appearance:none;border:1px solid var(--ring);background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;color:var(--ink);cursor:pointer}
+    .tab.active{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+    .spacer{flex:1}
+    .link{color:inherit;text-decoration:none;font-size:14px}
+    .link:hover{opacity:.8}
 
-const ProjectItem = ({ title, href, desc }) => (
-  <li className="mb-6">
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className="text-lg font-semibold underline-offset-4 hover:underline"
-    >
-      {title}
-    </a>
-    {desc && <p className="text-gray-600 mt-1 text-sm sm:text-base">{desc}</p>}
-  </li>
-);
+    main{padding:28px 0 48px}
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
 
-export default function Portfolio() {
-  const [tab, setTab] = useState("About me");
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:20px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .card h2{margin:0 0 8px;font-size:22px}
+    .card h3{margin:0 0 6px;font-size:16px}
+    .muted{color:var(--muted)}
+    ul.clean{padding-left:18px;margin:10px 0}
+    li+li{margin-top:8px}
+    .projects li a{font-weight:600;text-decoration:none}
+    .projects li a:hover{text-decoration:underline}
 
-  const tabs = ["About me", "Projects", "Papers", "Dance"];
-
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      {/* Header / Brand */}
-      <header className="bg-black text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
-          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight">Nishtha Ladi</h1>
-          <p className="mt-2 text-sm sm:text-base opacity-90">
-            Presidential Scholar & Dean’s List @ Boston University • Computer Engineering (ML Concentration)
-          </p>
-          <p className="text-sm sm:text-base opacity-80">Co‑founder of Endelevu • Dance & Sports Enthusiast</p>
-        </div>
-      </header>
-
-      {/* Tabs */}
-      <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-2 sm:gap-3 py-3 sm:py-4 overflow-x-auto no-scrollbar">
-            {tabs.map((t) => (
-              <TabButton key={t} label={t} active={tab === t} onClick={() => setTab(t)} />
-            ))}
-            <div className="ml-auto flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/nishtha-ladi-005232318"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm sm:text-base hover:underline"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="1 Page Resume_Nishtha Ladi_Sep25.docx.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm sm:text-base hover:underline"
-              >
-                Resume (PDF)
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {tab === "About me" && (
-          <div className="space-y-8">
-            <SectionCard>
-              <h2 className="text-xl sm:text-2xl font-semibold">About me</h2>
-              <p className="mt-3 text-gray-700 leading-relaxed">
-                I’m a Computer Engineering undergrad (ML concentration) at Boston University, focused on
-                building reliable, practical AI systems and energy‑aware computing. I enjoy creating products
-                that blend clever engineering with clean UX—and I dance with BU Jalwa on the side ✨.
-              </p>
-            </SectionCard>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <SectionCard>
-                <h3 className="text-lg font-semibold">Skills</h3>
-                <ul className="mt-3 list-disc list-inside text-gray-700 space-y-1">
-                  <li>
-                    <b>Programming & Tools:</b> Python, C++, Java, SQL, MATLAB, AI/ML
-                  </li>
-                  <li>
-                    <b>Other:</b> AWS, REST APIs, data visualization, hardware design (Verilog)
-                  </li>
-                  <li>
-                    <b>Languages:</b> English, Hindi, Odia, Telugu
-                  </li>
-                </ul>
-              </SectionCard>
-              <SectionCard>
-                <h3 className="text-lg font-semibold">Related Coursework</h3>
-                <p className="mt-3 text-gray-700">
-                  Linear Algebra, Intro to Software Engineering, Data Structures & Algorithms, Software Design,
-                  Operating Systems, Cloud Computing, Machine Learning, Artificial Intelligence
-                </p>
-              </SectionCard>
-            </div>
-          </div>
-        )}
-
-        {tab === "Projects" && (
-          <div className="space-y-8">
-            <SectionCard>
-              <h2 className="text-xl sm:text-2xl font-semibold">Selected Projects</h2>
-              <ul className="mt-5">
-                <ProjectItem
-                  title="Contract Analysis"
-                  href="#"
-                  desc="NLP pipeline to extract, categorize, and analyze clauses from contracts—surfacing risks, obligations, and compliance markers for faster review. Report/code on request."
-                />
-                <ProjectItem
-                  title="Cricket Fantasy Auction Game"
-                  href="#"
-                  desc="Auction-based fantasy cricket with live match integration; real‑time points update from performance feeds."
-                />
-                <ProjectItem
-                  title="Fugaku Dataset Feature Prediction"
-                  href="https://github.com/NishthaLadi-21/Fugaku.git"
-                  desc="ML models to predict performance features of supercomputer jobs; explored feature selection & regression for scalable HPC workloads."
-                />
-                <ProjectItem
-                  title="Othello Game"
-                  href="https://github.com/NishthaLadi/Comp_proj_Othello"
-                  desc="One‑ and two‑player Othello with board logic, move validation, and basic AI strategies."
-                />
-                <ProjectItem
-                  title="\"Bug Fixing\" Tetris Game (PDF)"
-                  href="EC 327 Project_Group 4.pdf"
-                  desc="Custom Tetris with debugging challenges embedded in gameplay."
-                />
-                <ProjectItem
-                  title="Digital Clock (Verilog) — PDF"
-                  href="EC 311 - Final Project.pdf"
-                  desc="Modular hardware design and real‑time simulation."
-                />
-                <ProjectItem
-                  title="Air Quality Surveillance Data Analysis"
-                  href="Air Quality Surveillance Data Analysis.pdf"
-                  desc="Data cleaning, visualization, and analysis of urban air quality trends."
-                />
-                <ProjectItem
-                  title="Biometric Device: Smart Runner 4000 — Final Presentation"
-                  href="EK210-Final_Presentation.pdf"
-                  desc="Sensor‑based performance tracker for runners (heart rate, distance, stride). Includes analytics to assist training."
-                />
-                <ProjectItem
-                  title="Biometric Device: Smart Runner 4000 — Project Report"
-                  href="EK210_FinalReport.pdf"
-                />
-                <ProjectItem
-                  title="Temperature Sensor Box (IoT) — Demo PDF"
-                  href="Ek131+-+FinalDemo+-+Nishtha+Ladi.pdf"
-                />
-              </ul>
-            </SectionCard>
-          </div>
-        )}
-
-        {tab === "Papers" && (
-          <div className="space-y-8">
-            <SectionCard>
-              <h2 className="text-xl sm:text-2xl font-semibold">Papers & Technical Writing</h2>
-              <ul className="mt-4 list-disc list-inside text-gray-700 space-y-2">
-                <li>
-                  <span className="font-medium">DeepSeek Efficiency Analysis (2025):</span> enterprise cost/energy/deployment study; comparisons with GPT‑4o & Claude 3.5; prepared detailed training deck for EY.
-                </li>
-                <li>
-                  <span className="font-medium">Physics‑Informed ELMs & NeuroChaos (2024):</span> notes and experiments on PI‑ELM for differential equations and NeuroChaos for classification/regression.
-                </li>
-              </ul>
-              <p className="mt-4 text-gray-600 text-sm">(Add public links or PDFs here when ready.)</p>
-            </SectionCard>
-          </div>
-        )}
-
-        {tab === "Dance" && (
-          <div className="space-y-8">
-            <SectionCard>
-              <h2 className="text-xl sm:text-2xl font-semibold">Dance — BU Jalwa</h2>
-              <p className="mt-3 text-gray-700">
-                Captain for BU Jalwa (XXII season). I help with choreography, recruitment, and team communications.
-                We perform high‑energy Bollywood‑fusion sets with strong storytelling and stagecraft.
-              </p>
-              <div className="mt-5 grid sm:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold">Highlights</h3>
-                  <ul className="mt-2 list-disc list-inside text-gray-700 space-y-1">
-                    <li>Choreography & formations for competition sets</li>
-                    <li>Photoshoot & costume planning (pastel/white theme for XXII)</li>
-                    <li>Show coordination (e.g., BUIC Fall Show)</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold">Upcoming / Example Dates</h3>
-                  <ul className="mt-2 list-disc list-inside text-gray-700 space-y-1">
-                    <li>Sept 26 — Big/Lil Reveal + Initiation</li>
-                    <li>Sept 28 — Team Photoshoot</li>
-                    <li>Nov 2 — BUIC Fall Show</li>
-                  </ul>
-                </div>
-              </div>
-            </SectionCard>
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-gray-600 flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-          <span>© {new Date().getFullYear()} Nishtha Ladi</span>
-          <span className="hidden sm:inline">•</span>
-          <a
-            href="mailto:nishthaladi21@gmail.com"
-            className="hover:underline"
-          >
-            nishthaladi21@gmail.com
-          </a>
-        </div>
-      </footer>
+    footer{background:#fff;border-top:1px solid var(--ring)}
+    footer .container{padding:16px 20px;color:var(--muted);font-size:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Nishtha Ladi</h1>
+      <p class="sub">Presidential Scholar & Dean’s List @ Boston University • Computer Engineering (ML Concentration)</p>
+      <p class="sub2">Co‑founder of Endelevu • Dance & Sports Enthusiast</p>
     </div>
-  );
-}
+  </header>
+
+  <nav class="tabs">
+    <div class="container">
+      <button class="tab active" data-tab="about">About me</button>
+      <button class="tab" data-tab="projects">Projects</button>
+      <button class="tab" data-tab="papers">Papers</button>
+      <button class="tab" data-tab="dance">Dance</button>
+      <div class="spacer"></div>
+      <a class="link" href="https://www.linkedin.com/in/nishtha-ladi-005232318" target="_blank" rel="noreferrer">LinkedIn</a>
+      <span>·</span>
+      <a class="link" href="1 Page Resume_Nishtha Ladi_Sep25.docx.pdf" target="_blank" rel="noreferrer">Resume (PDF)</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- About -->
+    <section id="about" class="tab-panel">
+      <div class="grid">
+        <div class="card">
+          <h2>About me</h2>
+          <p class="muted">I’m a Computer Engineering undergrad (ML concentration) at Boston University, focused on building reliable, practical AI systems and energy‑aware computing. I enjoy creating products that blend clever engineering with clean UX — and I dance with BU Jalwa on the side ✨.</p>
+        </div>
+        <div class="card">
+          <h3>Related Coursework</h3>
+          <p class="muted">Linear Algebra, Intro to Software Engineering, Data Structures & Algorithms, Software Design, Operating Systems, Cloud Computing, Machine Learning, Artificial Intelligence</p>
+        </div>
+        <div class="card">
+          <h3>Skills</h3>
+          <ul class="clean">
+            <li><b>Programming & Tools:</b> Python, C++, Java, SQL, MATLAB, AI/ML</li>
+            <li><b>Other:</b> AWS, REST APIs, data visualization, hardware design (Verilog)</li>
+            <li><b>Languages:</b> English, Hindi, Odia, Telugu</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="tab-panel" hidden>
+      <div class="card">
+        <h2>Selected Projects</h2>
+        <ul class="clean projects">
+          <li><a href="#" target="_blank">Contract Analysis</a><br/><span class="muted">NLP pipeline to extract, categorize, and analyze clauses from contracts—surfacing risks, obligations, and compliance markers for faster review. Report/code on request.</span></li>
+          <li><a href="#" target="_blank">Cricket Fantasy Auction Game</a><br/><span class="muted">Auction‑based fantasy cricket with live match integration; real‑time points update from performance feeds.</span></li>
+          <li><a href="https://github.com/NishthaLadi-21/Fugaku.git" target="_blank">Fugaku Dataset Feature Prediction</a><br/><span class="muted">ML models to predict performance features of supercomputer jobs; explored feature selection & regression for scalable HPC workloads.</span></li>
+          <li><a href="https://github.com/NishthaLadi/Comp_proj_Othello" target="_blank">Othello Game</a><br/><span class="muted">One‑ and two‑player Othello with board logic, move validation, and basic AI strategies.</span></li>
+          <li><a href="EC 327 Project_Group 4.pdf" target="_blank">"Bug Fixing" Tetris Game (PDF)</a></li>
+          <li><a href="EC 311 - Final Project.pdf" target="_blank">Digital Clock (Verilog) — PDF</a></li>
+          <li><a href="Air Quality Surveillance Data Analysis.pdf" target="_blank">Air Quality Surveillance Data Analysis</a></li>
+          <li><a href="EK210-Final_Presentation.pdf" target="_blank">Smart Runner 4000 — Final Presentation</a> · <a href="EK210_FinalReport.pdf" target="_blank">Project Report</a></li>
+          <li><a href="Ek131+-+FinalDemo+-+Nishtha+Ladi.pdf" target="_blank">Temperature Sensor Box — Demo PDF</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Papers -->
+    <section id="papers" class="tab-panel" hidden>
+      <div class="card">
+        <h2>Papers & Technical Writing</h2>
+        <ul class="clean">
+          <li><b>DeepSeek Efficiency Analysis (2025):</b> enterprise cost/energy/deployment study; comparisons with GPT‑4o & Claude 3.5; prepared detailed training deck for EY.</li>
+          <li><b>Physics‑Informed ELMs & NeuroChaos (2024):</b> notes and experiments on PI‑ELM for differential equations and NeuroChaos for classification/regression.</li>
+        </ul>
+        <p class="muted">(Add public links or PDFs here when ready.)</p>
+      </div>
+    </section>
+
+    <!-- Dance -->
+    <section id="dance" class="tab-panel" hidden>
+      <div class="card">
+        <h2>Dance — BU Jalwa</h2>
+        <p class="muted">Captain for BU Jalwa (XXII season). I help with choreography, recruitment, and team communications. We perform high‑energy Bollywood‑fusion sets with strong storytelling and stagecraft.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Highlights</h3>
+            <ul class="clean">
+              <li>Choreography & formations for competition sets</li>
+              <li>Photoshoot & costume planning (pastel/white theme for XXII)</li>
+              <li>Show coordination (e.g., BUIC Fall Show)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Upcoming / Example Dates</h3>
+            <ul class="clean">
+              <li>Sept 26 — Big/Lil Reveal + Initiation</li>
+              <li>Sept 28 — Team Photoshoot</li>
+              <li>Nov 2 — BUIC Fall Show</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Nishtha Ladi · <a class="link" href="mailto:nishthaladi21@gmail.com">nishthaladi21@gmail.com</a></div>
+  </footer>
+
+  <script>
+    // Simple tab switcher (no frameworks)
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach(btn=>btn.addEventListener('click',()=>{
+      const id = btn.dataset.tab;
+      tabs.forEach(b=>b.classList.toggle('active', b===btn));
+      panels.forEach(p=>p.hidden = p.id !== id);
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
